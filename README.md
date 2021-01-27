@@ -1,14 +1,14 @@
 # vendor-upload
 
 # Problem
-We need a way for our subscription fulfillment vendor to deliver subscriber data to the organization. They will deliver uncompressed TSV files to us via a simple file upload process.
+We need a way for our subscription fulfillment vendor to deliver subscriber data to the organization. They will deliver uncompressed TSV files to us via a simple file upload process. Create a web application to facilitate this process.
 
 # Solution
 For this solution, I built a simple django application which relies heavily on the built-in admin interface. To keep things simple, a sqlite database is used. My goal was to deliver a solution that actually works but it comes with some sacrifices. Read below for issues with this implementation and recommended steps on deploying to a real world environment.
 
 ## Install the vendor-upload app and dependencies
 ```
-git clone https://github.com/bpilkerton/vendor-upload.git
+git clone git@github.com:bpilkerton/vendor-upload.git
 cd vendor-upload
 ```
 
@@ -40,8 +40,23 @@ Vendor User: vendor/d@taDeliV3ry
 
 From here, one can edit the properties of individual records or manually add/delete records.
 
-## What's happening here?
-
 ## What are the problems with this approach?
 
+* The database is not normalized. If I had the time I would update the model and add these tables
+    * User table -- first_name, last_name etc
+    * Products table -- product_id, product_name, product_price
+    * Transactions table -- relations to User and Product, status etc
+* The application doesn't do any checks on the uploaded file. All user input should not be trusted. I'd enforce certain file extensions and mime types, potentially run the file through an antivirus engine etc
+* There are no tests! I'd add tests to enforce data integrity on the uploaded file as well as the application itself.
+* No data sanitization or normalization of the tsv data itself
+
 ## How I'd deploy something like this in the real world
+
+In the real world, this application wouldn't do so well running on the built-in Django webserver. In the past I've used these tools to deploy to production:
+
+* gunicorn - a WSGI server to run the app with multiple workers
+* supervisord - a program to manage the service and ensure uptime
+* nginx - a reverse proxy to serve client requests and talk to the backend server
+
+https://data.chronicle.com and https://aldaily.com are example implementations in production.
+
