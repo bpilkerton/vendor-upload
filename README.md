@@ -1,10 +1,12 @@
 # vendor-upload
 
 # Problem
+We need a way for our subscription fulfillment vendor to deliver subscriber data to the organization. They will deliver uncompressed TSV files to us via a simple file upload process.
 
 # Solution
+For this solution, I built a simple django application which relies heavily on the built-in admin interface. To keep things simple, a sqlite database is used. My goal was to deliver a solution that actually works but it comes with some sacrifices. Read below for issues with this implementation and recommended steps on deploying to a real world environment.
 
-# Install vendor-upload app and dependencies
+## Install the vendor-upload app and dependencies
 ```
 git clone https://github.com/bpilkerton/vendor-upload.git
 cd vendor-upload
@@ -18,8 +20,9 @@ source .venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-# Run the app
+## Run the app
 ```
+cd src
 python manage.py runserver
 ```
 
@@ -37,4 +40,8 @@ Vendor User: vendor/d@taDeliV3ry
 
 From here, one can edit the properties of individual records or manually add/delete records.
 
-# What's happening here?
+## What's happening here?
+
+## What are the problems with this approach?
+
+## How I'd deploy something like this in the real world
