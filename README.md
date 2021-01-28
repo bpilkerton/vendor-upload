@@ -39,7 +39,22 @@ Vendor User: vendor/d@taDeliV3ry
 4. Select `Vendor Datas` on the left navigation to view the imported records
 
 From here, one can edit the properties of individual records or manually add/delete records.
+Or you can query the database directly doing something like:
 
+```
+sqlite3 db.sqlite3
+
+sqlite> select * from upload_upload;
+1|vendor_uploads/sample-data.txt|2021-01-27 22:52:08.139384
+
+sqlite> select * from upload_vendordata;
+1|1|Snake|Plisken|123 Fake St.|AZ|12345|new|432|Masthead|100.12|2007-04-05
+2|1|Snake|Plisken|123 Fake St.|AZ|12345|canceled|432|Masthead|100.12|2007-04-06
+3|2|Clark|Kent|456 Fake St.|CA|54321|new|431|Print Magazine|50.12|2007-04-07
+4|3|Johnny|Johnson|789 Not Real St.|OH|45321|new|431|Print Magazine|50.12|2007-04-08
+5|3|Johnny|Johnson|789 Not Real St.|OH|45321|canceled|431|Print Magazine|50.12|2007-04-08
+...
+```
 ## What are the problems with this approach?
 
 * The database is not normalized. If I had the time I would update the model and add these tables
