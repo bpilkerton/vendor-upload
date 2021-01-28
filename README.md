@@ -72,6 +72,7 @@ In the real world, this application wouldn't do so well running on the built-in 
 * gunicorn - a WSGI server to run the app with multiple workers
 * supervisord - a program to manage the service and ensure uptime
 * nginx - a reverse proxy to serve client requests and talk to the backend server
+* rabbitmq/celery - message queue to initiate the processing of files and tasks
 
 https://data.chronicle.com and https://aldaily.com are example implementations in production.
 
