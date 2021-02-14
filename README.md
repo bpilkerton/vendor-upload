@@ -12,7 +12,7 @@ git clone git@github.com:bpilkerton/vendor-upload.git
 cd vendor-upload
 ```
 
-###Run via Docker
+### Run via Docker
 
 Start up the app and create a user
 
@@ -23,7 +23,7 @@ docker-compose exec web python manage.py createsuperuser
 Open Browser to http://127.0.0.1:8888/
 ```
 
-###Run app natively:
+### Run app natively:
 
 ## Add the virtualenv...
 ```
