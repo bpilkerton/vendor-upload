@@ -6,13 +6,26 @@ We need a way for our subscription fulfillment vendor to deliver subscriber data
 # Solution
 For this solution, I built a simple django application which relies heavily on the built-in admin interface. To keep things simple, a sqlite database is used. My goal was to deliver a solution that actually works but it comes with some sacrifices. Read below for issues with this implementation and recommended steps on deploying to a real world environment.
 
-## Install the vendor-upload app and dependencies
+## Install
 ```
-git clone git@github.com:bpilkerton/vendor-upload.git
+git clone https://github.com/bpilkerton/vendor-upload.git
 cd vendor-upload
 ```
 
-## And the virtualenv...
+###Run via Docker
+
+Start up the app and create a user
+
+```
+docker-compose up
+docker-compose exec web python manage.py createsuperuser
+
+Open Browser to http://127.0.0.1:8888/
+```
+
+###Run app natively:
+
+## Add the virtualenv...
 ```
 sudo pip3 install virtualenv
 virtualenv -p /usr/bin/python3 .venv
@@ -75,4 +88,3 @@ In the real world, this application wouldn't do so well running on the built-in 
 * rabbitmq/celery - message queue to initiate the processing of files and tasks
 
 https://data.chronicle.com and https://aldaily.com are example implementations in production.
-
